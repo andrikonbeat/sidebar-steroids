@@ -1,0 +1,275 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedFor": "Sidebar Steroids upstream attribution planning",
+  "upstream": {
+    "repositoryUrl": "https://github.com/Gentleman-Programming/gentle-shell.git",
+    "defaultBranch": "main",
+    "pinnedBaseCommit": "bac4c4a3ffc4e8455548691dcd820d60fd3c58f6",
+    "license": "MIT",
+    "licenseFile": "LICENSE",
+    "copyrightNotice": "Copyright (c) 2025 Mario Zechner",
+    "trademarkPolicyPath": "TRADEMARKS.md"
+  },
+  "contribution": {
+    "contributorHandle": "andrikonbeat",
+    "role": "External contributor proposing a generic sidebar extension API and separately maintaining the Sidebar Steroids add-on",
+    "scope": "Plan one generic, backward-compatible sidebar extension seam in upstream Gentle Shell; keep Sidebar Steroids product behavior in a separate Pi package and keep attribution documentation local unless upstream maintainers request it.",
+    "status": "planned",
+    "historyAttributionPolicy": "Attribute only file-level changes with an explicit diff against the pinned upstream base. The three local commits beyond the pinned base are not attributed to Sidebar Steroids."
+  },
+  "delivery": {
+    "packageModel": "separate Pi npm package",
+    "separatePackage": true,
+    "modifiedDistributionOfUpstream": false,
+    "provisionalPackageName": "pi-sidebar-steroids",
+    "installationMechanism": "Install as a Pi package through Pi's package manager; do not patch or overwrite an installed gentle-pi or gentle-shell.",
+    "compatibilityStrategy": "Discover the optional upstream sidebar extension API by capability. If it is absent or incompatible, fail closed with a clear compatibility message and leave the existing Status sidebar unchanged. Do not monkey-patch the upstream package.",
+    "packageIdentityNote": "The provisional package name is subject to package-registry availability and trademark review; it must not be presented as official upstream branding.",
+    "sourceRepositoryStrategy": "Maintain the installable Sidebar Steroids product in a dedicated repository with a distinct primary identity, provisionally andrikonbeat/sidebar-steroids.",
+    "currentRepositoryRole": "Use this checkout as the upstream reference and preparation surface for a generic, independently reviewable sidebar host API contribution. Do not mix product-specific behavior into that upstream candidate.",
+    "remoteRepositoryAction": "Repository creation, npm publication, pull requests, and releases remain separate human-owned actions."
+  },
+  "plannedUpstreamChanges": [
+    {
+      "path": "lib/sidebar-extension-api.ts",
+      "purpose": "Define a small, versioned public contract for optional third-party sidebar extensions without importing add-on-specific Git, Files, or Sidebar Steroids behavior.",
+      "changeType": "new-public-contract-module",
+      "publicContractImpact": "Additive and opt-in. Existing sidebar behavior and defaults remain unchanged when no extension registers.",
+      "attributionMarkerStrategy": "Use one sidebar-extension-api marker at the public registration seam; do not mark individual contract lines.",
+      "status": "planned"
+    },
+    {
+      "path": "lib/shell-sidebar.ts",
+      "purpose": "Expose the existing terminal-owned sidebar registration boundary through the generic extension contract.",
+      "changeType": "modified-extension-seam",
+      "publicContractImpact": "Additive API surface only; current internal callers and Status rendering remain compatible.",
+      "attributionMarkerStrategy": "Use one sidebar-extension-api marker immediately around the adapter or registration seam.",
+      "status": "planned"
+    },
+    {
+      "path": "lib/shell-sidebar-layout.ts",
+      "purpose": "Allow an opted-in extension to participate in the fullscreen rail lifecycle and disposal without embedding product-specific rendering logic.",
+      "changeType": "modified-layout-extension-seam",
+      "publicContractImpact": "No default visual change. Lifecycle and rendering behavior change only for a registered compatible extension.",
+      "attributionMarkerStrategy": "Use one sidebar-extension-api marker at the render and disposal bridge seam.",
+      "status": "planned"
+    },
+    {
+      "path": "extensions/gentle-shell.ts",
+      "purpose": "Wire the upstream extension entry point to the public sidebar extension contract during host initialization.",
+      "changeType": "modified-entry-point-wiring",
+      "publicContractImpact": "Host initialization exposes the opt-in seam without changing the default Status view.",
+      "attributionMarkerStrategy": "Use one sidebar-extension-api marker at the initialization call seam.",
+      "status": "planned"
+    },
+    {
+      "path": "tests/sidebar-extension-api.test.ts",
+      "purpose": "Test the generic contract's registration, compatibility, and disposal semantics independently of any product add-on.",
+      "changeType": "new-tests",
+      "publicContractImpact": "No runtime contract change; tests define the proposed backward-compatible behavior.",
+      "attributionMarkerStrategy": "No source marker: test attribution is carried by Git history and this manifest.",
+      "status": "planned"
+    },
+    {
+      "path": "tests/shell-sidebar-extension.test.ts",
+      "purpose": "Verify that extension registration is opt-in, leaves the default Status sidebar unchanged, and cleans up safely.",
+      "changeType": "new-tests",
+      "publicContractImpact": "No runtime contract change; tests protect the existing default behavior.",
+      "attributionMarkerStrategy": "No source marker: test attribution is carried by Git history and this manifest.",
+      "status": "planned"
+    },
+    {
+      "path": "docs/sidebar-extension-api.md",
+      "purpose": "Document the generic extension lifecycle, compatibility requirements, and example usage without describing a product-specific add-on.",
+      "changeType": "new-documentation",
+      "publicContractImpact": "Documents the proposed public contract; adds no runtime behavior.",
+      "attributionMarkerStrategy": "No source marker: documentation attribution is carried by Git history and this manifest.",
+      "status": "planned"
+    }
+  ],
+  "localOnlyChanges": [
+    {
+      "path": "odd/tasks/sidebar-steroids-prd.md",
+      "purpose": "Track the Sidebar Steroids feature requirements, decisions, provenance policy, and verification scope.",
+      "changeType": "documentation-feature-tracker",
+      "deliveryScope": "local-only",
+      "publicContractImpact": "None. This tracker is not an upstream API change.",
+      "status": "planned"
+    },
+    {
+      "path": "docs/sidebar-steroids/ChatGPT_Explica-flujo-GitHub_20261108-0500.md",
+      "purpose": "Retain the source product concept for STATUS, GIT, and FILES as design context rather than implementation evidence.",
+      "changeType": "documentation-product-context",
+      "deliveryScope": "local-only",
+      "publicContractImpact": "None. This product vision is not an upstream API change.",
+      "status": "planned"
+    },
+    {
+      "path": "docs/sidebar-steroids/PRD.md",
+      "purpose": "Define the Sidebar Steroids product requirements, installability contract, architecture boundary, acceptance criteria, and delivery gates.",
+      "changeType": "documentation-product-requirements",
+      "deliveryScope": "local-only",
+      "publicContractImpact": "None. The PRD is not an upstream API change; it specifies the separately distributed add-on and the generic host capability it requires.",
+      "status": "planned"
+    },
+    {
+      "path": "docs/sidebar-steroids/UPSTREAM_ATTRIBUTION.md",
+      "purpose": "Define the human-readable contribution, provenance, marker, refresh, CI, and release-gate protocol.",
+      "changeType": "documentation-attribution-protocol",
+      "deliveryScope": "local-only",
+      "publicContractImpact": "None. This protocol is not an upstream API change; it documents a possible contribution without implementing one.",
+      "status": "planned"
+    },
+    {
+      "path": "docs/sidebar-steroids/upstream-manifest.json",
+      "purpose": "Record machine-readable upstream provenance, planned file scope, local-only scope, verification requirements, and release gates.",
+      "changeType": "machine-readable-attribution-manifest",
+      "deliveryScope": "local-only",
+      "publicContractImpact": "None. The manifest is not an upstream API change; it records plans and evidence without implementing an API change.",
+      "status": "planned"
+    }
+  ],
+  "changeAccounting": {
+    "status": "planned",
+    "pinnedBaseCommit": "bac4c4a3ffc4e8455548691dcd820d60fd3c58f6",
+    "actualChangedFiles": [],
+    "actualChangedHunks": [],
+    "refreshProcedure": "Before opening a contribution candidate, diff the candidate head against the pinned base, record every changed path and zero-context hunk in the matching plannedUpstreamChanges entry, classify each path, and update this accounting block. Do not infer attribution from commit messages alone.",
+    "ciCompletenessPolicy": "For an implementation candidate, fail CI when any changed upstream file is absent from plannedUpstreamChanges, when a path is classified both upstream and local-only, or when an implemented upstream entry has no refreshed file and hunk evidence."
+  },
+  "verification": {
+    "currentArtifactChecks": [
+      {
+        "command": "test -f docs/sidebar-steroids/UPSTREAM_ATTRIBUTION.md && test -f docs/sidebar-steroids/upstream-manifest.json",
+        "expectedEvidence": "Exit status 0 confirms that both attribution artifacts exist."
+      },
+      {
+        "command": "node -e 'JSON.parse(require(\"node:fs\").readFileSync(\"docs/sidebar-steroids/upstream-manifest.json\", \"utf8\")); console.log(\"valid\")'",
+        "expectedEvidence": "Exit status 0 and the output 'valid' confirm that the manifest is valid JSON."
+      },
+      {
+        "command": "grep -F 'sidebar-extension-api' docs/sidebar-steroids/UPSTREAM_ATTRIBUTION.md docs/sidebar-steroids/upstream-manifest.json",
+        "expectedEvidence": "Matches in both files confirm that the marker convention is documented and recorded."
+      },
+      {
+        "command": "grep -F 'bac4c4a3ffc4e8455548691dcd820d60fd3c58f6' docs/sidebar-steroids/UPSTREAM_ATTRIBUTION.md docs/sidebar-steroids/upstream-manifest.json",
+        "expectedEvidence": "Matches in both files confirm that the same pinned upstream base is recorded."
+      }
+    ],
+    "baseRefreshCommands": [
+      {
+        "command": "BASE=bac4c4a3ffc4e8455548691dcd820d60fd3c58f6; HEAD=$(git rev-parse HEAD); git cat-file -e \"${BASE}^{commit}\"",
+        "expectedEvidence": "Exit status 0 confirms that the pinned base is an available commit."
+      },
+      {
+        "command": "BASE=bac4c4a3ffc4e8455548691dcd820d60fd3c58f6; HEAD=$(git rev-parse HEAD); git merge-base --is-ancestor \"$BASE\" \"$HEAD\"",
+        "expectedEvidence": "Exit status 0 confirms that the candidate is based on the pinned base; a non-zero status requires rebasing or deliberately refreshing the recorded base."
+      },
+      {
+        "command": "BASE=bac4c4a3ffc4e8455548691dcd820d60fd3c58f6; HEAD=$(git rev-parse HEAD); git diff --name-status \"$BASE\" \"$HEAD\"",
+        "expectedEvidence": "The output is the authoritative changed-file set to classify and match against the manifest."
+      },
+      {
+        "command": "BASE=bac4c4a3ffc4e8455548691dcd820d60fd3c58f6; HEAD=$(git rev-parse HEAD); git diff --unified=0 \"$BASE\" \"$HEAD\"",
+        "expectedEvidence": "The zero-context diff provides the actual hunk headers to record against the matching manifest entries."
+      },
+      {
+        "command": "BASE=bac4c4a3ffc4e8455548691dcd820d60fd3c58f6; HEAD=$(git rev-parse HEAD); git diff --check \"$BASE\" \"$HEAD\"",
+        "expectedEvidence": "Exit status 0 confirms that the candidate diff has no whitespace errors."
+      },
+      {
+        "command": "BASE=bac4c4a3ffc4e8455548691dcd820d60fd3c58f6; git log --format='%H%x09%an%x09%ae%x09%s' \"$BASE..HEAD\"",
+        "expectedEvidence": "Commit identity and subject output corroborates Git attribution; it does not replace the manifest."
+      }
+    ],
+    "requiredChecks": [
+      {
+        "id": "manifest-json-valid",
+        "command": "node -e 'JSON.parse(require(\"node:fs\").readFileSync(\"docs/sidebar-steroids/upstream-manifest.json\", \"utf8\"))'",
+        "expectedEvidence": "The manifest parses without error."
+      },
+      {
+        "id": "planned-status-accurate",
+        "command": "node scripts/verify-upstream-manifest.mjs --base bac4c4a3ffc4e8455548691dcd820d60fd3c58f6 --head \"$(git rev-parse HEAD)\" --manifest docs/sidebar-steroids/upstream-manifest.json --require-planned",
+        "expectedEvidence": "For the current documentation-only state, the check confirms that every manifest change entry remains planned and that no upstream implementation is claimed."
+      },
+      {
+        "id": "ci-manifest-completeness",
+        "command": "node scripts/verify-upstream-manifest.mjs --base bac4c4a3ffc4e8455548691dcd820d60fd3c58f6 --head \"$(git rev-parse HEAD)\" --manifest docs/sidebar-steroids/upstream-manifest.json",
+        "expectedEvidence": "For an implementation candidate, exit status 0 confirms that every changed upstream file is represented in the manifest; a non-zero status lists missing paths. This checker is a planned CI artifact and is not created by the documentation-only task."
+      },
+      {
+        "id": "license-and-notice-retention",
+        "command": "git diff bac4c4a3ffc4e8455548691dcd820d60fd3c58f6 -- LICENSE",
+        "expectedEvidence": "No unexpected diff exists; any upstream license change is separately approved and retains the MIT notice and Copyright (c) 2025 Mario Zechner."
+      },
+      {
+        "id": "trademark-wording-review",
+        "command": "git diff bac4c4a3ffc4e8455548691dcd820d60fd3c58f6 -- TRADEMARKS.md package.json docs",
+        "expectedEvidence": "Review shows truthful compatibility wording, a distinct primary add-on name, and no claim of official status, sponsorship, endorsement, or permission to use upstream marks."
+      },
+      {
+        "id": "independent-addon-license",
+        "command": "test -f LICENSE && node -e 'const p=require(\"./package.json\"); if (!p.license || !p.name || !p.repository) process.exit(1)'",
+        "expectedEvidence": "For the separately distributed add-on, exit status 0 confirms that it has an explicit license, identity, and repository metadata. The add-on must carry any upstream MIT notices required for copied upstream code."
+      }
+    ]
+  },
+  "releaseGates": [
+    {
+      "id": "upstream-license-and-notice-retention",
+      "blocking": true,
+      "status": "planned",
+      "evidence": "The upstream LICENSE is retained, the MIT notice remains in copies or substantial portions, and any required third-party notices are present."
+    },
+    {
+      "id": "upstream-trademark-wording",
+      "blocking": true,
+      "status": "planned",
+      "evidence": "User-facing text uses truthful compatibility wording, does not imply official status or endorsement, uses a distinct primary name, and has no confusingly similar upstream package or project name."
+    },
+    {
+      "id": "contributor-attribution",
+      "blocking": true,
+      "status": "planned",
+      "evidence": "Git author metadata, an accurate Co-authored-by trailer where appropriate, the manifest, and the PR identify andrikonbeat without rewriting upstream history."
+    },
+    {
+      "id": "independent-addon-licensing",
+      "blocking": true,
+      "status": "planned",
+      "evidence": "The add-on has its own explicit license and package metadata, is not labeled as a modified gentle-pi distribution, and includes the upstream MIT notice for any copied upstream code."
+    },
+    {
+      "id": "manifest-actual-diff-refresh",
+      "blocking": true,
+      "status": "planned",
+      "evidence": "Actual changed files and zero-context hunks against the pinned base are classified and recorded before submission; no planned entry is presented as implemented without diff evidence."
+    },
+    {
+      "id": "manifest-ci-completeness",
+      "blocking": true,
+      "status": "planned",
+      "evidence": "CI fails when a changed upstream file is missing from the manifest or is classified as both upstream and local-only."
+    },
+    {
+      "id": "generic-upstream-pr-reviewability",
+      "blocking": true,
+      "status": "planned",
+      "evidence": "The upstream PR contains only the generic host seam, its tests, and generic documentation; Sidebar Steroids product behavior, branding, and package delivery remain outside that PR."
+    },
+    {
+      "id": "compatibility-and-regression-tests",
+      "blocking": true,
+      "status": "planned",
+      "evidence": "Focused contract, layout, cleanup, and default-Status regression tests pass, and the add-on fails closed when the host API is absent or incompatible."
+    }
+  ],
+  "currentGaps": [
+    "No upstream implementation diff exists; every manifest change entry is planned.",
+    "The candidate CI checker is specified but is not implemented by this documentation-only task.",
+    "Actual changed files and hunks cannot be recorded until a contribution candidate exists against the pinned base.",
+    "Upstream maintainer acceptance and any trademark permission remain undetermined.",
+    "The provisional package name remains subject to registry availability and final trademark review."
+  ]
+}

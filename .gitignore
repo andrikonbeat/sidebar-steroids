@@ -1,0 +1,13 @@
+# Dependencies & build
+node_modules/
+dist/
+coverage/
+
+# Pi & Gentle runtime scratch
+.pi/
+.gentle/
+.atl/
+
+# OS / Editor
+.DS_Store
+*.log
